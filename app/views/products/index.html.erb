@@ -1,13 +1,13 @@
-<h1><%= @message %></h1>
-<p>This is your ecommerce homepage.</p>
-
-<h1>Product List</h1>
+<h1>Products</h1>
+<%= link_to 'Add New Product', new_product_path %>
 
 <% @products.each do |product| %>
   <div style="border:1px solid #ddd; padding:10px; margin:10px;">
     <h2><%= link_to product.name, product_path(product) %></h2>
     <p><%= product.description %></p>
-    <strong>Price:</strong> <%= number_to_currency(product.price) %><br>
-    <strong>Stock:</strong> <%= product.stock %>
+    <p>Price: <%= number_to_currency(product.price) %></p>
+    <p>Stock: <%= product.stock %></p>
+    <%= link_to 'Edit', edit_product_path(product) %> |
+    <%= link_to 'Delete', product_path(product), method: :delete, data: { confirm: "Are you sure?" } %>
   </div>
 <% end %>
