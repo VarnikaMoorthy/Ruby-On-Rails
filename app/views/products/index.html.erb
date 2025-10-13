@@ -2,7 +2,7 @@
 <%= link_to 'Add New Product', new_product_path %>
 
 <% @products.each do |product| %>
-  <div style="border:1px solid #ddd; padding:10px; margin:10px;">
+  <div class="product-card">
     <h2><%= link_to product.name, product_path(product) %></h2>
     <p><%= product.description %></p>
     <p>Price: <%= number_to_currency(product.price) %></p>
