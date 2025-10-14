@@ -57,8 +57,9 @@ class ProductsController < ApplicationController
   # GET /products/:id/buy
   # Show Buy form for a product
   def buy
-    @order = OpenStruct.new # temporary object to hold form data
-  end
+  @product = Product.find(params[:id])
+end
+
 
   # POST /products/:id/purchase
   # Process order placement

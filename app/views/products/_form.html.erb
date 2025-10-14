@@ -1,30 +1,23 @@
-<%= form_with model: product, local: true do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
+<%= form_with(model: @product, local: true) do |form| %>
+  <div class="mb-4">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-input" %>
+  </div>
 
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
+  <div class="mb-4">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-textarea" %>
+  </div>
 
-  <p>
-    <%= f.label :price %><br>
-    <%= f.number_field :price, step: 0.01 %>
-  </p>
+  <div class="mb-4">
+    <%= form.label :price %>
+    <%= form.number_field :price, class: "form-input" %>
+  </div>
 
-  <p>
-    <%= f.label :stock %><br>
-    <%= f.number_field :stock %>
-  </p>
+  <div class="mb-4">
+    <%= form.label :stock %>
+    <%= form.number_field :stock, class: "form-input" %>
+  </div>
 
-  <p>
-  <%= f.label :image %><br>
-  <%= f.file_field :image %>
-</p>
-
-  <p>
-    <%= f.submit product.new_record? ? "Create Product" : "Update Product" %>
-  </p>
+  <%= form.submit "Update Product", class: "btn btn-primary" %>
 <% end %>

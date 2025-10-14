@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>EcommerceStore</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+  
+<head>
+  <title>EcommerceStore</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <!-- Stylesheets -->
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+</head>
 
-    <!-- Rails 7 JS with importmap -->
-    <%= javascript_importmap_tags %>
-  </head>
 
   <body>
     <!-- Flash messages -->
