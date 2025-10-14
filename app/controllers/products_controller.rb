@@ -5,12 +5,8 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
-  def show
-  end
-
-  def new
-    @product = Product.new
-  end
+  def show; end
+  def new; @product = Product.new; end
 
   def create
     @product = Product.new(product_params)
@@ -21,8 +17,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product.update(product_params)
@@ -33,9 +28,9 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-  @product.destroy
-  redirect_to products_path, notice: "Product deleted successfully."
-end
+    @product.destroy
+    redirect_to products_path, notice: "Product deleted successfully."
+  end
 
   private
 

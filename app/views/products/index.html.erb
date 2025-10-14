@@ -1,5 +1,6 @@
 <h1>Products</h1>
-<%= link_to 'Add New Product', new_product_path %>
+
+<%= link_to 'Add New Product', new_product_path, class: "add-product-link" %>
 
 <% @products.each do |product| %>
   <div class="product-card">
@@ -7,7 +8,14 @@
     <p><%= product.description %></p>
     <p>Price: <%= number_to_currency(product.price) %></p>
     <p>Stock: <%= product.stock %></p>
-    <%= link_to 'Edit', edit_product_path(product) %> |
-    <%= link_to 'Delete', product_path(product), method: :delete, data: { confirm: "Are you sure?" } %>
+
+    <div class="product-actions">
+      <%= link_to 'Edit', edit_product_path(product), class: "edit-link" %>
+
+      <%= button_to 'Delete', product_path(product),
+          method: :delete,
+          data: { confirm: "Are you sure you want to delete this product?" },
+          class: "delete-button" %>
+    </div>
   </div>
 <% end %>
