@@ -1,0 +1,30 @@
+<h1>Sign up</h1>
+<% if flash[:alert] %>
+  <p style="color: red;"><%= flash[:alert] %></p>
+<% end %>
+
+<%= form_with model: @user, url: signup_path do |f| %>
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, value: @user&.name %>
+  </div>
+
+  <div>
+    <%= f.label :email %><br>
+    <%= f.email_field :email, value: @user&.email %>
+  </div>
+
+  <div>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>

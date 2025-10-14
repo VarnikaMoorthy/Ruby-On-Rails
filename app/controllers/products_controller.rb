@@ -1,7 +1,11 @@
 class ProductsController < ApplicationController
   require 'ostruct'
 
+  # Load product for actions that need it
   before_action :set_product, only: [:show, :edit, :update, :destroy, :buy, :purchase]
+
+  # require login for any actions that modify data or show forms
+  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
 
 
   # GET /products

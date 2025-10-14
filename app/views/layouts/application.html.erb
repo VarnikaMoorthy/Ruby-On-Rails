@@ -6,15 +6,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- Stylesheets -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-
-    <!-- Rails 7 JS with importmap -->
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
-    <!-- Flash messages -->
+    <header style="padding: 1rem; border-bottom: 1px solid #ddd; margin-bottom: 1rem;">
+      <nav>
+        <%= link_to 'Home', root_path %>
+        <% if logged_in? %>
+          | Hello, <strong><%= current_user['name'] %></strong>
+          | <%= button_to 'Logout', logout_path, method: :delete, form: { style: 'display:inline' } %>
+        <% else %>
+          | <%= link_to 'Login', login_path %>
+          | <%= link_to 'Sign up', signup_path %>
+        <% end %>
+      </nav>
+    </header>
+
     <% if notice %>
       <div class="notice" style="background-color:#d4edda; padding:10px; margin:10px 0; border-radius:5px;">
         <%= notice %>
@@ -27,7 +37,6 @@
       </div>
     <% end %>
 
-    <!-- Main content -->
     <div class="container">
       <%= yield %>
     </div>
