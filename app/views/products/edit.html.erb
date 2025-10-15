@@ -1,2 +1,56 @@
-<h1>Edit Product</h1>
-<%= render 'form', product: @product %>
+<!-- app/views/products/edit.html.erb -->
+
+<div class="min-h-screen bg-gray-100 flex flex-col items-center py-12">
+  <!-- Page Title -->
+  <h1 class="text-3xl font-bold mb-8 text-gray-800">Edit Product</h1>
+
+  <!-- Form Container -->
+  <div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8 md:p-12">
+    <%= form_with(model: @product, local: true, html: { class: "space-y-6" }) do |form| %>
+
+      <!-- Name -->
+      <div>
+        <%= form.label :name, "Product Name", class: "block text-gray-700 font-semibold mb-2" %>
+        <%= form.text_field :name, class: "w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" %>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <%= form.label :description, "Description", class: "block text-gray-700 font-semibold mb-2" %>
+        <%= form.text_area :description, rows: 5, class: "w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" %>
+      </div>
+
+      <!-- Price & Stock -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <%= form.label :price, "Price ($)", class: "block text-gray-700 font-semibold mb-2" %>
+          <%= form.number_field :price, step: 0.01, class: "w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" %>
+        </div>
+        <div>
+          <%= form.label :stock, "Stock", class: "block text-gray-700 font-semibold mb-2" %>
+          <%= form.number_field :stock, class: "w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" %>
+        </div>
+      </div>
+
+      <!-- Image Upload -->
+      <div>
+        <%= form.label :image, "Product Image", class: "block text-gray-700 font-semibold mb-2" %>
+        <%= form.file_field :image, class: "w-full border border-gray-300 p-3 rounded-lg cursor-pointer" %>
+
+        <% if @product.image.attached? %>
+          <div class="mt-4">
+            <p class="text-gray-600 mb-2 font-medium">Current Image:</p>
+            <%= image_tag @product.image, class: "w-48 h-48 object-cover rounded-lg shadow-md" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-between items-center mt-8">
+        <%= form.submit "Update Product", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition" %>
+        <%= link_to "Cancel", products_path, class: "text-gray-600 hover:text-gray-800 font-semibold transition" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

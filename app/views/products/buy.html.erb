@@ -1,30 +1,53 @@
-<h1>Buy <%= @product.name %></h1>
+<!-- app/views/products/buy.html.erb -->
 
-<p>Price: <%= number_to_currency(@product.price) %></p>
-<p>Available Stock: <%= @product.stock %></p>
+<div class="min-h-screen bg-gray-100 py-12 flex flex-col items-center">
 
-<%= form_with url: purchase_product_path(@product), method: :post, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :name, "Your Name" %>
-    <%= f.text_field :name, required: true %>
+  <!-- Page Title -->
+  <h1 class="text-3xl font-bold mb-6 text-gray-800 text-center">Buy Product</h1>
+
+  <!-- Back Button -->
+  <div class="w-full max-w-4xl mb-6 px-4">
+    <%= link_to "← Back to Products", products_path, class: "inline-block bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-semibold py-2 px-4 rounded shadow transition" %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :email, "Email" %>
-    <%= f.email_field :email, required: true %>
-  </div>
+  <!-- Product Container -->
+  <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
 
-  <div class="form-group">
-    <%= f.label :address, "Shipping Address" %>
-    <%= f.text_area :address, required: true %>
-  </div>
+    <!-- Product Image -->
+    <div class="flex justify-center items-center bg-white rounded-2xl shadow-lg p-4">
+      <% if @product.image.attached? %>
+        <%= image_tag @product.image, class: "object-contain w-full h-64 md:h-72" %>
+      <% else %>
+        <div class="w-full h-64 flex items-center justify-center text-gray-400">
+          No Image Available
+        </div>
+      <% end %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :quantity, "Quantity" %>
-    <%= f.number_field :quantity, value: 1, min: 1, max: @product.stock, required: true %>
-  </div>
+    <!-- Product Details and Buy Form -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col justify-between space-y-6">
+      <div>
+        <h2 class="text-2xl font-semibold mb-2 text-gray-800"><%= @product.name %></h2>
+        <p class="text-gray-700 mb-4"><%= @product.description %></p>
+        <p class="text-2xl font-bold text-green-600 mb-6">$<%= @product.price %></p>
+      </div>
 
-  <div class="form-actions">
-    <%= f.submit "Place Order", class: "buy-submit-button" %>
+      <%= form_with(model: @order, local: true, class: "space-y-4") do |form| %>
+        <div>
+          <%= form.label :quantity, class: "block font-medium mb-1 text-gray-700" %>
+          <%= form.number_field :quantity, value: 1, min: 1, class: "w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" %>
+        </div>
+
+        <div>
+          <%= form.label :address, "Shipping Address", class: "block font-medium mb-1 text-gray-700" %>
+          <%= form.text_area :address, rows: 4, class: "w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" %>
+        </div>
+
+        <div>
+          <%= form.submit "Place Order", class: "w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg shadow-lg transition" %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
-<% end %>
+</div>
