@@ -1,17 +1,16 @@
 <h1>Products</h1>
 
-<% if logged_in? %>
-  <%= link_to 'Add New Product', new_product_path, class: "add-product-link" %>
-<% end %>
+<%= link_to 'Add New Product', new_product_path, class: "add-product-link" %>
 
 <div class="products-grid">
   <% @products.each do |product| %>
     <div class="product-card">
-      <% if product.image.attached? %>
-        <%= image_tag product.image, class: "product-image", size: "150x150" %>
-      <% else %>
-        <%= image_tag "placeholder.png", class: "product-image", size: "150x150" %>
-      <% end %>
+     <% if product.image.attached? %>
+      <%= image_tag product.image, class: "product-image", size: "150x150" %>
+     <% else %>
+      <%= image_tag "placeholder.png", class: "product-image", size: "150x150" %>
+     <% end %>
+  
 
       <!-- Product info -->
       <h2><%= product.name %></h2>
@@ -19,17 +18,17 @@
 
       <!-- Actions -->
       <div class="product-actions">
-        <!-- Buy only one at a time: links to order form (available to all) -->
+        <!-- Buy only one at a time: links to order form -->
         <%= link_to 'Buy', buy_product_path(product), class: "buy-button" %>
 
-        <% if logged_in? %>
-          <%= link_to 'Edit', edit_product_path(product), class: "edit-link" %>
+        <!-- Edit product -->
+        <%= link_to 'Edit', edit_product_path(product), class: "edit-link" %>
 
-          <%= button_to 'Delete', product_path(product),
+        <!-- Delete with confirmation -->
+        <%= button_to 'Delete', product_path(product),
               method: :delete,
               data: { confirm: "Are you sure you want to delete this product?" },
               class: "delete-button" %>
-        <% end %>
       </div>
     </div>
   <% end %>

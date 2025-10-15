@@ -25,8 +25,6 @@ gem "stimulus-rails"
 
 # JSON API builder
 gem "jbuilder"
-# Gemfile
-gem "tailwindcss-rails"
 
 # Windows timezone support
 gem "tzinfo-data", platforms: %i[ windows jruby ]
